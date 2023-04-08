@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>FirstPlugin Property Inspector</title>
+	<link rel="stylesheet" href="css/sdpi.css">
+	<link rel="stylesheet" href="css/property-inspector.css">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+			integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+			crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="sdpi-wrapper">
+		<!-- for more examples of the types of fields supported in property inspector visit:
+			Elgato Github PiSamples -> https://github.com/elgatosf/streamdeck-pisamples
+			and
+			Elgato SDK Documentation -> https://developer.elgato.com/documentation/stream-deck/sdk/property-inspector/
+	-->
+		<!--<div class="sdpi-item">
+		<div class="sdpi-item-label">Button</div>
+		<select class="sdpi-item-value select" id="myselect">
+			<option value="janedoe@example.com">Jane Doe</option>
+			<option value="someguy@example.com">Some Guy</option>
+		</select>
+		<button class="sdpi-item-value">Or Me</button>
+	</div>-->
+		<!--DEVICE-->
+		<div class="sdpi-item" id="select_single">
+			<div class="sdpi-item-label">Select device</div>
+			<select class="sdpi-item-value select" id="mydevices" onchange="settingsModel.SelectedDeviceName = event.target.value; setSettings()">
+			</select>
+			<button class="sdpi-item-value max20" id="mybutton" onclick="clickRefresh()">Refresh</button>
+		</div>
+
+		<!--MODE-->
+		<div class="sdpi-item" id="select_single">
+			<div class="sdpi-item-label">Connection</div>
+			<select class="sdpi-item-value select" id="mymodes" onchange="settingsModel.SelectedMode = event.target.value; setSettings()">
+			</select>
+		</div>
+
+		<!--ICON-->
+		<div class="sdpi-item" id="select_single">
+			<div class="sdpi-item-label">Icon</div>
+			<select class="sdpi-item-value select" id="myicons" onchange="settingsModel.SelectedIcon = event.target.value; setSettings()">
+				<option value='0' selected>Default</option>
+				<option value='3'>AirPods</option>
+				<option value='6'>Keyboard</option>
+				<option value='9'>Portable Speaker</option>
+				<option value='12'>Game Controller</option>
+				<option value='15'>Fitness Tracker</option>
+				<option value='18'>Mouse</option>
+				<option value='21'>Printer</option>
+				
+			</select>
+		</div>
+
+
+		<!--<div class="sdpi-item">
+		<div class="sdpi-item-label"></div>
+		<button class="sdpi-item-value max20" id="mybutton" onclick="clickRefresh()">Refresh</button>
+	</div>-->
+
+
+	</div>
+	<script src="js/property-inspector.js"></script>
+</body>
+</html>
