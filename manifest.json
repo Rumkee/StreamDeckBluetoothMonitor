@@ -140,7 +140,7 @@
   "Description": "monitors and sets Bluetooth connection status.",
   "Name": "Bluetooth Monitor",
   "Icon": "images/pluginIcon",
-  "URL": "https://www.elgato.com/gaming/stream-deck",
+  "URL": "https://github.com/Rumkee/StreamDeckBluetoothMonitor",
   "Version": "1.0",
   "SDKVersion": 2,
   "Software": {

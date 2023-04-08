@@ -47,7 +47,7 @@ namespace BluetoothController.Helpers
                 }
 
                 return device != null;
-            }
+            }  
             catch (Exception ex)
             {
                 _logger?.LogError(ex, "Error loading Bluetooth device.");
@@ -112,7 +112,7 @@ namespace BluetoothController.Helpers
                     var targetServiceId = RfcommServiceId.FromShortId((uint)Mode);
 
                     RfcommDeviceServicesResult services = await device.GetRfcommServicesForIdAsync(targetServiceId);
-                    RfcommDeviceService service = services.Services.Single();
+                    RfcommDeviceService service = services.Services.FirstOrDefault();
 
                     await streamSocket.ConnectAsync(service.ConnectionHostName, service.ConnectionServiceName,
                     SocketProtectionLevel.BluetoothEncryptionAllowNullAuthentication);

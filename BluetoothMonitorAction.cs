@@ -16,8 +16,8 @@ namespace BluetoothController
 
 
     [ActionUuid(Uuid= "me.rumkee.bluetooth.monitor")]
-  public class BluetoothMonitorAction : BaseStreamDeckActionWithSettingsModel<BluetoothMonitorActionModel>
-  {
+  public class BluetoothMonitorAction : BaseStreamDeckActionWithSettingsModel<BluetoothMonitorActionModel>, IDisposable
+    {
      
         private readonly BluetoothDeviceHelper selectedBluetoothDevice;
         private readonly ActionHelper actionHelper;
@@ -212,8 +212,13 @@ namespace BluetoothController
             await Manager.SetSettingsAsync(context, SettingsModel);
         }
 
-    
-
-
+        public void Dispose()
+        {
+            if (selectedBluetoothDevice != null)
+            {
+                 selectedBluetoothDevice.BluetoothConnectionStatusChangedEvent -= BluetoothThing_BluetoothConnectionStatusChangedEvent;
+            }
+         
+        }
     }
 }

@@ -75,3 +75,7 @@ I absolutely welcome PR's to this project!
 This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE.md) file for details.
 
 ## Acknowledgements
+1. [Elgato SDK](https://developer.elgato.com/documentation/stream-deck/sdk/overview/)
+2. [FritzAndFriends/StreamDeckToolkit](https://github.com/FritzAndFriends/StreamDeckToolkit) This plugin is built on top of the StreamDeckToolkit, which is a wrapper around the Elgato SDK.
+3. [Collors.co](https://coolors.co/palette/ee6055-60d394-aaf683-ffd97d-ff9b85) colour palette used for the StreamDeck plugin icon
+4. [icons8](https://icons8.com) the icons used in this plugin
