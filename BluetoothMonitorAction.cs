@@ -59,7 +59,7 @@ namespace BluetoothController
             Logger?.LogTrace("OnDidReceiveSettings, context={args}", args.context);
             await base.OnDidReceiveSettings(args);
 
-            var newSelectedIcon = args.payload?.settings?.settings?.SelectedIcon?.Value;
+            var newSelectedIcon = args.payload?.settings?.NewSettingsModel?.SelectedIcon?.Value;
             if (!string.IsNullOrEmpty(newSelectedIcon))
             {
                 if (SettingsModel.SelectedIcon != newSelectedIcon)
@@ -74,8 +74,8 @@ namespace BluetoothController
                 SettingsModel.SelectedIcon = Constants.IconOfset.Generic.ToString();
             }
 
-            string newSelectedDeviceName = Convert.ToString(args.payload?.settings?.settings?.SelectedDeviceName?.Value);
-            string newSelectedModeStr = Convert.ToString(args.payload?.settings?.settings?.SelectedMode?.Value);
+            string newSelectedDeviceName = Convert.ToString(args.payload?.settings?.NewSettingsModel?.SelectedDeviceName?.Value);
+            string newSelectedModeStr = Convert.ToString(args.payload?.settings?.NewSettingsModel?.SelectedMode?.Value);
             _ = int.TryParse(newSelectedModeStr, out int newSelectedMode);
 
             //if we've picked a device, and it's different to what we had previously selected
@@ -122,7 +122,7 @@ namespace BluetoothController
                 SettingsModel.SelectedDeviceName = args.payload.settings.settingsModel.SelectedDeviceName;
                 SettingsModel.SelectedIcon = args.payload.settings.settingsModel.SelectedIcon;
                 
-                string newSelectedModeStr = Convert.ToString(args.payload?.settings?.settings?.SelectedMode?.Value);
+                string newSelectedModeStr = Convert.ToString(args.payload?.settings?.settingsModel?.SelectedMode?.Value);
                 _ = int.TryParse(newSelectedModeStr, out int newSelectedMode);
                 SettingsModel.SelectedMode = newSelectedMode;// args.payload.settings.settingsModel.SelectedMode;
 

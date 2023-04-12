@@ -153,7 +153,7 @@ if (websocket) {
 	  "event": "setSettings",
 	  "context": uuid,
 	  "payload": {
-		"settings": settingsModel
+		"NewSettingsModel": settingsModel
 	  }
 	};
 	websocket.send(JSON.stringify(json));
