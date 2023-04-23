@@ -126,7 +126,7 @@
         }
       ],
       "SupportedInMultiActions": false,
-      "Tooltip": "monitors and sets Bluetooth connection status",
+      "Tooltip": "Monitors and sets Bluetooth connection status",
       "UUID": "me.rumkee.bluetooth.monitor"
     }
   ],
@@ -137,11 +137,11 @@
   "CodePathWin": "me.rumkee.bluetooth.monitor.exe",
   "CodePathMac": "BluetoothController",
   "PropertyInspectorPath": "property_inspector/property_inspector.html",
-  "Description": "monitors and sets Bluetooth connection status.",
+  "Description": "Monitors and sets Bluetooth connection status.",
   "Name": "Bluetooth Monitor",
   "Icon": "images/pluginIcon",
   "URL": "https://github.com/Rumkee/StreamDeckBluetoothMonitor",
-  "Version": "1.0",
+  "Version": "1.0.0",
   "SDKVersion": 2,
   "Software": {
     "MinimumVersion": "5.0"

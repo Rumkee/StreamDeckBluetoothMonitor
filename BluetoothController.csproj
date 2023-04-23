@@ -12,6 +12,13 @@
 		<RuntimeIdentifiers Condition="'$(Configuration)'=='Release' ">win-x64;osx-x64</RuntimeIdentifiers>
 		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
 		<AssemblyName>me.rumkee.bluetooth.monitor</AssemblyName>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DebugType>full</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <DebugType>full</DebugType>
 	</PropertyGroup>
 
 	<!-- Post build event scripts that deploy to stream deck -->
@@ -25,38 +32,65 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="images\3-dots-bounce.svg" />
+	  <None Remove="images\airpods-green%402x.png" />
 	  <None Remove="images\airpods-green.png" />
+	  <None Remove="images\airpods-grey%402x.png" />
 	  <None Remove="images\airpods-grey.png" />
+	  <None Remove="images\airpods-red%402x.png" />
 	  <None Remove="images\airpods-red.png" />
 	  <None Remove="images\categoryIcon%402x.png" />
 	  <None Remove="images\categoryIcon.png" />
+	  <None Remove="images\controller-green%402x.png" />
 	  <None Remove="images\controller-green.png" />
+	  <None Remove="images\controller-grey%402x.png" />
 	  <None Remove="images\controller-grey.png" />
+	  <None Remove="images\controller-red%402x.png" />
 	  <None Remove="images\controller-red.png" />
 	  <None Remove="images\credits.txt" />
+	  <None Remove="images\fitness-green%402x.png" />
 	  <None Remove="images\fitness-green.png" />
+	  <None Remove="images\fitness-grey%402x.png" />
 	  <None Remove="images\fitness-grey.png" />
+	  <None Remove="images\fitness-red%402x.png" />
 	  <None Remove="images\fitness-red.png" />
+	  <None Remove="images\generic-green%402x.png" />
 	  <None Remove="images\generic-green.png" />
+	  <None Remove="images\generic-grey%402x.png" />
 	  <None Remove="images\generic-grey.png" />
+	  <None Remove="images\generic-red%402x.png" />
 	  <None Remove="images\generic-red.png" />
 	  <None Remove="images\green.png" />
 	  <None Remove="images\grey.png" />
+	  <None Remove="images\keyboard-green%402x.png" />
 	  <None Remove="images\keyboard-green.png" />
+	  <None Remove="images\keyboard-grey%402x.png" />
 	  <None Remove="images\keyboard-grey.png" />
+	  <None Remove="images\keyboard-red%402x.png" />
 	  <None Remove="images\keyboard-red.png" />
+	  <None Remove="images\mouse-green%402x.png" />
 	  <None Remove="images\mouse-green.png" />
+	  <None Remove="images\mouse-grey%402x.png" />
 	  <None Remove="images\mouse-grey.png" />
+	  <None Remove="images\mouse-red%402x.png" />
 	  <None Remove="images\mouse-red.png" />
+	  <None Remove="images\printer-green%402x.png" />
 	  <None Remove="images\printer-green.png" />
+	  <None Remove="images\printer-grey%402x.png" />
 	  <None Remove="images\printer-grey.png" />
+	  <None Remove="images\printer-red%402x.png" />
 	  <None Remove="images\printer-red.png" />
 	  <None Remove="images\red.png" />
+	  <None Remove="images\sandtimer%402x.png" />
 	  <None Remove="images\sandtimer.png" />
+	  <None Remove="images\speaker-green%402x.png" />
 	  <None Remove="images\speaker-green.png" />
+	  <None Remove="images\speaker-grey%402x.png" />
 	  <None Remove="images\speaker-grey.png" />
+	  <None Remove="images\speaker-red%402x.png" />
 	  <None Remove="images\speaker-red.png" />
 	  <None Remove="images\spinner.gif" />
+	  <None Remove="previews\1-preview.png" />
+	  <None Remove="previews\2-preview.png" />
 	</ItemGroup>
 
 	<!--Dependencies-->
@@ -80,10 +114,19 @@
 		<Content Include="images\airpods-green.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\airpods-green@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\airpods-grey.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\airpods-grey@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\airpods-red.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\airpods-red@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="images\categoryIcon.png">
@@ -95,10 +138,19 @@
 		<Content Include="images\controller-green.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\controller-green@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\controller-grey.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\controller-grey@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\controller-red.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\controller-red@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="images\credits.txt">
@@ -107,58 +159,115 @@
 		<Content Include="images\fitness-green.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\fitness-green@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\fitness-grey.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\fitness-grey@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="images\fitness-red.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\fitness-red@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\generic-green.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\generic-green@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="images\generic-grey.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\generic-grey@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\generic-red.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\generic-red@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="images\keyboard-green.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\keyboard-green@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\keyboard-grey.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\keyboard-grey@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="images\keyboard-red.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\keyboard-red@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\mouse-green.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\mouse-green@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="images\mouse-grey.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\mouse-grey@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\mouse-red.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\mouse-red@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="images\printer-green.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\printer-green@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\printer-grey.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\printer-grey@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="images\printer-red.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\printer-red@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\sandtimer.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\sandtimer@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="images\speaker-green.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\speaker-green@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\speaker-grey.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+		<Content Include="images\speaker-grey@2x.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="images\speaker-red.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="images\speaker-red@2x.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="manifest.json">
@@ -182,6 +291,12 @@
 		</Content>
 		<Content Include="images/pluginIcon@2x.png">
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="previews\1-preview.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="previews\2-preview.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
