@@ -134,12 +134,7 @@ namespace BluetoothController.Helpers
             return false;
         }
 
-        // Disconnect from the Bluetooth device
-        //public async Task<bool> Disconnect()
-        //{
-        //    // TODO: Implement the disconnect functionality
-        //    throw new NotImplementedException();
-        //}
+
 
         // Get a dictionary of all paired Bluetooth devices
         public static async Task<Dictionary<string, string>> GetAllPairedBluetoothDevices()
@@ -160,29 +155,5 @@ namespace BluetoothController.Helpers
         }
 
 
-    
-
-        // Check if Bluetooth is on and turn it on if it's off
-        //private async Task<bool> CheckBluetoothOn()
-        //{
-        //    BluetoothAdapter adapter = await BluetoothAdapter.GetDefaultAsync();
-
-        //    if (adapter is not null && btRadio is null)
-        //    {
-        //        btRadio = await adapter.GetRadioAsync();
-        //        btRadio.StateChanged += Radio_StateChanged;
-        //    }
-
-        //    if (btRadio.State == RadioState.Off)
-        //    {
-        //     //   await btRadio.SetStateAsync(RadioState.On);
-
-        //        _logger?.LogInformation("Bluetooth radio is off {@btRadio}",btRadio);
-        //        return false;
-        //    }
-            
-
-        //    return true;
-        //}
     }
 }
