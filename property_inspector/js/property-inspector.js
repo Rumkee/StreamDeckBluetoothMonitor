@@ -18,16 +18,7 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
   inInfo = JSON.parse(inInfo);
   websocket = new WebSocket('ws://localhost:' + inPort);
 
-  //initialize values
-  //if (actionInfo.payload.settings.settingsModel) {
-	 // settingsModel.SelectedIcon = 0;//default
-  //}
-
-
-
-//	$("mydevices").val(actionInfo.payload.settings.settingsModel.sel);
-
-
+ 
 	console.log("connectElgatoStreamDeckSocket");
 	console.log(settingsModel);
 		
@@ -48,6 +39,12 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
 	switch (sdEvent) {
 	  case "didReceiveSettings":
 			if (jsonObj.payload.settings.settingsModel) {
+
+				if (jsonObj.payload.settings.settingsModel.BluetoothOn) {
+					$('#disabledWarning').hide();
+				} else {
+					$('#disabledWarning').show();
+				}
 				loadDevicesListFromJSON(jsonObj.payload.settings.settingsModel)
 				loadModesListFromJSON(jsonObj.payload.settings.settingsModel)
 
@@ -67,9 +64,9 @@ const loadDevicesListFromJSON = (data) => {
 
 	//only add selected to default if nothing else has selected
 	if (data.SelectedDeviceName) {
-		new_ul.push("<option disabled value> ----- select a device ----- </option>");
+		new_ul.push("<option disabled value>Select A Device</option>");
 	} else {
-		new_ul.push("<option disabled selected value> ----- select a device ----- </option>");
+		new_ul.push("<option disabled selected value>Select A Device</option>");
 	}
 
 	data.DeviceNames.forEach(e => {

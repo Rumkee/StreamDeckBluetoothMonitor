@@ -10,6 +10,7 @@ using System.Linq;
 using static StreamDeckLib.Messages.Info;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
+using BluetoothController.Models;
 
 namespace BluetoothController.Helpers
 {
@@ -21,8 +22,12 @@ namespace BluetoothController.Helpers
 
         public List<int> SupportedModes { get; set; }
 
+
         public delegate Task BluetoothConnectionStatusChanged(BluetoothDevice sender, object args);
+    
+
         public event BluetoothConnectionStatusChanged BluetoothConnectionStatusChangedEvent;
+      
 
         public BluetoothDeviceHelper(ILogger logger)
         {
@@ -36,7 +41,7 @@ namespace BluetoothController.Helpers
             {
                 targetDeviceId = _targetDeviceId;
 
-                await CheckBluetoothOn();
+             
 
                 device = await BluetoothDevice.FromIdAsync(targetDeviceId);
                 SupportedModes = GetConnectivityOptionsForDevice(device);
@@ -130,11 +135,11 @@ namespace BluetoothController.Helpers
         }
 
         // Disconnect from the Bluetooth device
-        public async Task<bool> Disconnect()
-        {
-            // TODO: Implement the disconnect functionality
-            throw new NotImplementedException();
-        }
+        //public async Task<bool> Disconnect()
+        //{
+        //    // TODO: Implement the disconnect functionality
+        //    throw new NotImplementedException();
+        //}
 
         // Get a dictionary of all paired Bluetooth devices
         public static async Task<Dictionary<string, string>> GetAllPairedBluetoothDevices()
@@ -154,25 +159,30 @@ namespace BluetoothController.Helpers
             return returnDict;
         }
 
+
+    
+
         // Check if Bluetooth is on and turn it on if it's off
-        private async Task<bool> CheckBluetoothOn()
-        {
-            BluetoothAdapter adapter = await BluetoothAdapter.GetDefaultAsync();
+        //private async Task<bool> CheckBluetoothOn()
+        //{
+        //    BluetoothAdapter adapter = await BluetoothAdapter.GetDefaultAsync();
 
-            if (adapter is not null)
-            {
-                Radio btRadio = await adapter.GetRadioAsync();
+        //    if (adapter is not null && btRadio is null)
+        //    {
+        //        btRadio = await adapter.GetRadioAsync();
+        //        btRadio.StateChanged += Radio_StateChanged;
+        //    }
 
-                if (btRadio.State == RadioState.Off)
-                {
-                    await btRadio.SetStateAsync(RadioState.On);
+        //    if (btRadio.State == RadioState.Off)
+        //    {
+        //     //   await btRadio.SetStateAsync(RadioState.On);
 
-                    _logger?.LogInformation("Bluetooth adapter was off. Turned it on.");
-                    return true;
-                }
-            }
+        //        _logger?.LogInformation("Bluetooth radio is off {@btRadio}",btRadio);
+        //        return false;
+        //    }
+            
 
-            return false;
-        }
+        //    return true;
+        //}
     }
 }
