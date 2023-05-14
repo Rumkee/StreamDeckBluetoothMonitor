@@ -1,5 +1,6 @@
 ﻿using BluetoothController.Helpers;
 using BluetoothController.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using StreamDeckLib;
@@ -23,21 +24,25 @@ namespace BluetoothController
         private  BluetoothDeviceHelper selectedBluetoothDevice;
         private readonly BluetoothRadioHelper radioHelper;
         private readonly ActionHelper actionHelper;
+        
 
         //constructor
         public BluetoothMonitorAction()
         {
-            actionHelper = new ActionHelper(base.Logger);
-            radioHelper = new BluetoothRadioHelper(base.Logger);
+        
+            actionHelper = new ActionHelper();
+            radioHelper = new BluetoothRadioHelper(Logger);
             radioHelper.RadioStatusChangedEvent += BluetoothThing_RadioStatusChangedEvent;
             CreateSelectedBluetoothDevice();
+
+           
 
         }
 
         private void CreateSelectedBluetoothDevice()
         {
             Logger?.LogDebug("CreateSelectedBluetoothDevice");
-            selectedBluetoothDevice = new BluetoothDeviceHelper(base.Logger);
+            selectedBluetoothDevice = new BluetoothDeviceHelper();
             selectedBluetoothDevice.BluetoothConnectionStatusChangedEvent += BluetoothThing_BluetoothConnectionStatusChangedEvent;
            
         }
@@ -60,9 +65,9 @@ namespace BluetoothController
 
             if (selectedBluetoothDevice !=null && SettingsModel.SelectedMode != 0 && SettingsModel.BluetoothOn)
             {
-            await ActionHelper.SetGreyIcon(args.context,SettingsModel,Manager);
+            await ActionHelper.SetGreyIcon(args.context,SettingsModel,Manager,Logger);
 
-            await selectedBluetoothDevice.Connect(SettingsModel.SelectedMode);
+            await selectedBluetoothDevice.Connect(SettingsModel.SelectedMode,Logger);
             await CheckSetStatusIcon(args.context);
             }
             else
@@ -107,20 +112,25 @@ namespace BluetoothController
                 SettingsModel.SelectedDeviceName = newSelectedDeviceName;
                 SettingsModel.Modes = BluetoothProfileData.GetBlank();
                 SettingsModel.SelectedMode = 0;
+                SettingsModel.SelectedDeviceID= actionHelper.GetDeviceIdFromName(SettingsModel.SelectedDeviceName, Logger);
+                
 
-                string deviceId = actionHelper.GetDeviceIdFromName(SettingsModel.SelectedDeviceName);
-
-                if (deviceId != null)
+                if (SettingsModel.SelectedDeviceID != null)
                 {
-                    Logger?.LogInformation("LoadDeviceFromId {@deviceId} {@SettingsModel}", deviceId, SettingsModel);
+                    Logger?.LogDebug("LoadDeviceFromId {@deviceId} {@SettingsModel}", SettingsModel.SelectedDeviceID, SettingsModel);
                     if (selectedBluetoothDevice == null)
                     {
                         CreateSelectedBluetoothDevice();
                     }
                     SettingsModel.BluetoothOn = await radioHelper.CheckBluetoothOn();
-                    await selectedBluetoothDevice.LoadDeviceFromId(deviceId);
+                    await selectedBluetoothDevice.LoadDeviceFromId(SettingsModel.SelectedDeviceID, Logger);
                     SettingsModel.Modes = BluetoothProfileData.GetListFromValues(selectedBluetoothDevice.SupportedModes);
                     SettingsModel.SelectedMode = SettingsModel.Modes.Last().Value;
+                }
+                else
+                {
+                    Logger?.LogDebug("could not find device {SelectedDeviceName} {@SettingsModel}", SettingsModel.SelectedDeviceName, SettingsModel);
+                    await Manager.ShowAlertAsync(args.context);
                 }
             }
 
@@ -128,7 +138,7 @@ namespace BluetoothController
                 {
                 Logger?.LogInformation("new SelectedMode {@newSelectedMode} {@SettingsModel}", newSelectedMode, SettingsModel);
                 SettingsModel.SelectedMode = newSelectedMode;
-                    await ActionHelper.SetGreyIcon(args.context, SettingsModel, Manager);
+                    await ActionHelper.SetGreyIcon(args.context, SettingsModel, Manager, Logger);
                     await CheckSetStatusIcon(args.context);
                 }
 
@@ -151,6 +161,7 @@ namespace BluetoothController
 
                 //copy settings to SettingsModel
                 SettingsModel.SelectedDeviceName = args.payload.settings.settingsModel.SelectedDeviceName;
+                SettingsModel.SelectedDeviceID = args.payload.settings.settingsModel.SelectedDeviceID;
                 SettingsModel.SelectedIcon = args.payload.settings.settingsModel.SelectedIcon;
                 Logger?.LogDebug("SelectedDeviceName and SelectedIcon set {@SettingsModel}", SettingsModel);
 
@@ -182,27 +193,35 @@ namespace BluetoothController
             actionHelper.Context = args.context;
 
             //load devices and send to UI
-            await actionHelper.LoadAllDevices(SettingsModel);
+            SettingsModel.BluetoothOn = await radioHelper.CheckBluetoothOn();
+            await actionHelper.LoadAllDevices(SettingsModel, Logger);
             await PushToPropertyInspector(args.context);
-
-            await LoadDeviceFromID(args.context);
+            await LoadDeviceFromSelectedDeviceID(args.context);
 
         }
 
-        private async Task LoadDeviceFromID(string context)
+        private async Task LoadDeviceFromSelectedDeviceID(string context)
         {
-            if (SettingsModel.SelectedDeviceName != null)
+            if (SettingsModel.SelectedDeviceID != null)
             {
-                Logger?.LogInformation("LoadDeviceFromId {@SettingsModel}", SettingsModel);
-                string deviceId = actionHelper.GetDeviceIdFromName(SettingsModel.SelectedDeviceName);
+                Logger?.LogDebug("LoadDeviceFromId {@SettingsModel}", SettingsModel);
+             //   string deviceId = actionHelper.GetDeviceIdFromName(SettingsModel.SelectedDeviceName, Logger);
 
-                if (selectedBluetoothDevice==null)
+                if (selectedBluetoothDevice == null)
                 {
                     CreateSelectedBluetoothDevice();
+
                 }
-                SettingsModel.BluetoothOn = await radioHelper.CheckBluetoothOn();
-                await selectedBluetoothDevice.LoadDeviceFromId(deviceId);
+               
+                    await selectedBluetoothDevice.LoadDeviceFromId(SettingsModel.SelectedDeviceID, Logger);
+              
+
                 await CheckSetStatusIcon(context);
+            }
+            else
+            {
+                Logger?.LogDebug("No SelectedDeviceID found {@SettingsModel}", SettingsModel);
+                await Manager.ShowAlertAsync(context);
             }
         }
 
@@ -216,7 +235,7 @@ namespace BluetoothController
         {
             Logger?.LogDebug("OnSendToPlugin {@args}", args);
 
-            await actionHelper.LoadAllDevices(SettingsModel);
+            await actionHelper.LoadAllDevices(SettingsModel, Logger);
             await PushToPropertyInspector(args.context);
 
         }
@@ -240,7 +259,7 @@ namespace BluetoothController
             else
             {
                 SettingsModel.BluetoothOn = true;
-                await LoadDeviceFromID(actionHelper.Context);
+                await LoadDeviceFromSelectedDeviceID(actionHelper.Context);
             }
             await PushToPropertyInspector(actionHelper.Context);
             await CheckSetStatusIcon(actionHelper.Context);
@@ -252,18 +271,18 @@ namespace BluetoothController
             Logger?.LogDebug("CheckSetStatusIcon {@context}{@SettingsModel}", context, SettingsModel);
             if (selectedBluetoothDevice == null || !SettingsModel.BluetoothOn)
             {               
-               await ActionHelper.SetGreyIcon(context, SettingsModel, Manager);
+               await ActionHelper.SetGreyIcon(context, SettingsModel, Manager, Logger);
                 return;
             }
                
 
             if (selectedBluetoothDevice.Status==BluetoothConnectionStatus.Connected)
             {
-                await ActionHelper.SetConnectedIcon(context, SettingsModel, Manager);
+                await ActionHelper.SetConnectedIcon(context, SettingsModel, Manager, Logger);
             }
             else
             {
-               await ActionHelper.SetDisconnectedIcon(context, SettingsModel, Manager);
+               await ActionHelper.SetDisconnectedIcon(context, SettingsModel, Manager, Logger);
             }
         }
 

@@ -8,6 +8,7 @@ namespace BluetoothController.Models
         public List<KeyValuePair<string, int>> Modes { get; set; }
         public int SelectedMode { get; set; }
         public string SelectedDeviceName { get; set; }
+        public string SelectedDeviceID { get; set; }
         public string SelectedIcon { get; set; }
         public bool BluetoothOn { get; set; }
 
