@@ -40,6 +40,7 @@ namespace BluetoothController.Helpers
         {
 
             bluetoothDevices.TryGetValue(deviceName, out string deviceValue);
+            logger?.LogDebug("GetDeviceIdFromName {deviceName} {deviceValue}", deviceName, deviceValue);
 
             if (deviceValue == null)
             {
@@ -50,24 +51,24 @@ namespace BluetoothController.Helpers
 
                
 
-                var fuzzyMatches = bluetoothDevices.Keys.Where(k => k.Contains(deviceName));
-                if (fuzzyMatches.Count() == 1)
-                {
-                    var matchedKey = fuzzyMatches.First();
-                    logger?.LogDebug("found single fuzzy match {deviceName} {matchedKey}", deviceName, matchedKey);
+                //var fuzzyMatches = bluetoothDevices.Keys.Where(k => k.Contains(deviceName));
+                //if (fuzzyMatches.Count() == 1)
+                //{
+                //    var matchedKey = fuzzyMatches.First();
+                //    logger?.LogDebug("found single fuzzy match {deviceName} {matchedKey}", deviceName, matchedKey);
 
-                    bluetoothDevices.TryGetValue(matchedKey, out string fuzzyMatchedDeviceValue);
-                    return fuzzyMatchedDeviceValue;
+                //    bluetoothDevices.TryGetValue(matchedKey, out string fuzzyMatchedDeviceValue);
+                //    return fuzzyMatchedDeviceValue;
 
-                }
-                else
-                {
-                    logger?.LogDebug("fuzzy match did not find a single match for {deviceName} {@fuzzyMatches}", deviceName, fuzzyMatches);
-                    return null;
-                }
+                //}
+                //else
+                //{
+                //    logger?.LogDebug("fuzzy match did not find a single match for {deviceName} {@fuzzyMatches}", deviceName, fuzzyMatches);
+                //    return null;
+                //}
             }
 
-            logger?.LogDebug("GetDeviceIdFromName {deviceName} {deviceValue}", deviceName, deviceValue);
+          
             return deviceValue;
         }
 
