@@ -39,9 +39,11 @@ The Bluetooth Device Manager Plugin for Elgato StreamDeck simplifies the managem
 1. Download the latest release from the [releases page](https://github.com/yourusername/elgato-streamdeck-plugin/releases).
 2. Locate the downloaded `.streamDeckPlugin` file and double-click it to install the plugin.
 3. The StreamDeck software should open, and you should see a prompt to confirm the installation. Click "Install" to continue.
-### From the store
 
-	TODO
+### From Elgato Plugin store
+
+&emsp;[https://apps.elgato.com/plugins/me.rumkee.bluetooth.monitor](https://apps.elgato.com/plugins/me.rumkee.bluetooth.monitor)
+
 
 ## Usage
 
