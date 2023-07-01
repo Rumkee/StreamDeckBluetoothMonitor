@@ -11,7 +11,8 @@ This repository contains a Bluetooth Manager plugin for the Elgato StreamDeck
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Limitations](#lmitations)
+- [Limitations](#limitations)
+- [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
@@ -55,7 +56,7 @@ the refresh button to rescan new devices.
 6. Select an Icon other than the Default one if you wish to. Alternatively, you can use your own custom icons by clicking the Icon image and choosing files for each of the radio button states (Disconnected & Connected)
 
 
-## Limitations/Known Issues
+## Limitations
 This section outlines the current limitations and known issues associated with the Bluetooth Device Manager Plugin. 
 I am only one individual with a limited number of Bluetooth devices to test with, so don't be too surprised if you find a device that doesn't work. If you do, please report it on the GitHub issues page.
 
@@ -65,6 +66,29 @@ I am only one individual with a limited number of Bluetooth devices to test with
 4. I'd like to add disconnect functionality - if I can figure out how to do it!
 
 If you encounter any issues, please report them on my [GitHub issues page](https://github.com/yourusername/elgato-streamdeck-bluetooth-plugin/issues), so we can work on resolving them as soon as possible.
+
+
+## Troubleshooting
+
+- I can't see my device!
+
+	- Check the device has been paired to windows.
+	- Press the 'refresh' button to reload devices.
+	- Verify you can see the device listed under 'Bluetooth and other Devices' in Windows settings
+	- Verify the device supports Bluetooth and isn't a Bluetooth LE device ( LE devices are not supported yet)
+
+- When I press to connect, it briefly connects, then disconnects!
+
+	- This behaviour is often seen when a device is connected to something other than Windows.
+	In this case, the plugin can not know that the device is connected to something else. Windows will incorrectly briefly report connecting, even though it hasn't.
+
+- I see a warning triangle when I press the button!
+
+	- This will happen if you have failed to select a 'connection' option in the settings
+
+- Why is the button icon grey?
+
+	- A grey icon indicates that Bluetooth is disabled. The icon will also be greyed out temporarily whilst establishing a connection
 
 ## Contributing
 
